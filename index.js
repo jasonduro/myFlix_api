@@ -111,7 +111,7 @@ app.get('/', (req, res) => {
       });
   });
 
-    //function to get all users
+    //READ Function #4 to get all users
     app.get('/users', (req, res) => {
       Users.find()
           .then((users) => {
@@ -161,6 +161,75 @@ app.get('/', (req, res) => {
           res.status(500).send('Error: ' + err);
       });
   });
+
+      // UPDATE function #6 - Allow Users to update their info (username, password, email, birthday)
+      app.put('/users/:Username', (req, res) => {
+        Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+        {
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+        }
+        },
+        { new: true }, // This line makes sure that the updated document is returned
+        (err, updatedUser) => {
+        if(err) {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        } else {
+            res.json(updatedUser);
+        }
+        });
+    });
+
+    // UPDATE Function #7 - Allow users to Add a movie to a user's list of favorites
+    app.post('/users/:Username/movies/:MovieId', (req, res) => {
+        Users.findOneAndUpdate({ Username: req.params.Username }, {
+        $addToSet: { FavoriteMovies: req.params.MovieId }
+        },
+        { new: true }, // This line makes sure that the updated document is returned
+        (err, updatedUser) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        } else {
+            res.json(updatedUser);
+        }
+        });
+    });
+
+    // DELETE Function #8 - Allow users to Delete a movie from a user's list of favorites
+    app.delete('/users/:Username/movies/:MovieId', (req, res) => {
+        Users.findOneAndUpdate({ Username: req.params.Username }, {
+        $pull: { FavoriteMovies: req.params.MovieId }
+        },
+        { new: true }, // This line makes sure that the updated document is returned
+        (err, updatedUser) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        } else {
+            res.json(updatedUser);
+        }
+        });
+    });
+
+    // DELETE Function #9 - Allow existing users to deregister
+    app.delete('/users/:Username', (req, res) => {
+        Users.findOneAndRemove({ Username: req.params.Username })
+        .then((user) => {
+            if (!user) {
+            res.status(400).send(req.params.Username + ' was not found');
+            } else {
+            res.status(200).send(req.params.Username + ' was deleted.');
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+    });
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
