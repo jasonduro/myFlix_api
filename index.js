@@ -64,7 +64,7 @@ app.use(bodyParser.urlencoded({
 // setup the logger
 app.use(morgan('combined', {stream: accessLogStream}));
 // using express to access the public folder documentation html file
-app.use(express.static('public'));
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to my super awesome myFlix movie API app-thing-a-bob!');
@@ -77,6 +77,8 @@ app.get('/secreturl', (req, res) => {
 app.get('/movies', (req, res) => {
     res.send(movies)
 })
+
+app.use(express.static('public'));
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
