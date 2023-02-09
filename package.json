@@ -1,0 +1,25 @@
+{
+  "name": "myflix_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonduro/myFlix_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasonduro/myFlix_api/issues"
+  },
+  "homepage": "https://github.com/jasonduro/myFlix_api#readme",
+  "dependencies": {
+    "express-generator": "^4.2.0",
+    "lodash": "^4.17.21"
+  }
+}
