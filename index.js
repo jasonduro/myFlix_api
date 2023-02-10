@@ -75,7 +75,7 @@ app.get('/', (req, res) => {
     });
   });
 
-  //function to return data about a genre by name
+  //READ Function #3 to return data about a genre by name
   app.get('/movies/genre/:Name', (req, res) => {
     Movies.findOne({ 'Genre.Name': req.params.Name })
       .then((movies) => {
@@ -99,7 +99,7 @@ app.get('/', (req, res) => {
     });
   });
 
-  //function to return data about a director by name
+  //READ Function #4 to return data about a director by name
   app.get('/movies/director/:Name', (req, res) => {
     Movies.findOne({ 'Director.Name': req.params.Name })
       .then((movies) => {
@@ -111,7 +111,7 @@ app.get('/', (req, res) => {
       });
   });
 
-    //READ Function #4 to get all users
+    //READ Function #5 to get all users
     app.get('/users', (req, res) => {
       Users.find()
           .then((users) => {
@@ -123,7 +123,7 @@ app.get('/', (req, res) => {
       });
   });
 
-  //CREATE Function #5 - Allow new users to register
+  //CREATE Function #6 - Allow new users to register
   app.post('/users', (req, res) => {
     Users.findOne({ Username: req.body.Username })
       .then((user) => {
@@ -150,7 +150,7 @@ app.get('/', (req, res) => {
       }); 
   }); 
 
-    // Get a user by username - GET Request for specific user based on username
+    // Get Function #7 a user by username - GET Request for specific user based on username
     app.get('/users/:Username', (req, res) => {
       Users.findOne({ Username: req.params.Username })
       .then((user) => {
@@ -162,7 +162,7 @@ app.get('/', (req, res) => {
       });
   });
 
-      // UPDATE function #6 - Allow Users to update their info (username, password, email, birthday)
+      // UPDATE function #8 - Allow Users to update their info (username, password, email, birthday)
       app.put('/users/:Username', (req, res) => {
         Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
         {
@@ -183,7 +183,7 @@ app.get('/', (req, res) => {
         });
     });
 
-    // UPDATE Function #7 - Allow users to Add a movie to a user's list of favorites
+    // UPDATE Function #9 - Allow users to Add a movie to a user's list of favorites
     app.post('/users/:Username/movies/:MovieId', (req, res) => {
         Users.findOneAndUpdate({ Username: req.params.Username }, {
         $addToSet: { FavoriteMovies: req.params.MovieId }
@@ -199,7 +199,7 @@ app.get('/', (req, res) => {
         });
     });
 
-    // DELETE Function #8 - Allow users to Delete a movie from a user's list of favorites
+    // DELETE Function #10 - Allow users to Delete a movie from a user's list of favorites
     app.delete('/users/:Username/movies/:MovieId', (req, res) => {
         Users.findOneAndUpdate({ Username: req.params.Username }, {
         $pull: { FavoriteMovies: req.params.MovieId }
@@ -215,7 +215,7 @@ app.get('/', (req, res) => {
         });
     });
 
-    // DELETE Function #9 - Allow existing users to deregister
+    // DELETE Function #11 - Allow existing users to deregister
     app.delete('/users/:Username', (req, res) => {
         Users.findOneAndRemove({ Username: req.params.Username })
         .then((user) => {
