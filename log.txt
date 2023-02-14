@@ -170,3 +170,4 @@
 ::1 - - [09/Feb/2023:23:51:52 +0000] "POST /users/usernum2 HTTP/1.1" 404 154 "-" "PostmanRuntime/7.30.0"
 ::1 - - [09/Feb/2023:23:52:49 +0000] "POST /users HTTP/1.1" 201 178 "-" "PostmanRuntime/7.30.0"
 ::1 - - [10/Feb/2023:00:06:27 +0000] "DELETE /users/pastafarian HTTP/1.1" 200 24 "-" "PostmanRuntime/7.30.0"
+::1 - - [14/Feb/2023:09:15:52 +0000] "GET /movies HTTP/1.1" 201 4981 "-" "PostmanRuntime/7.30.0"
