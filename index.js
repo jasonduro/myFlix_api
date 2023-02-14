@@ -30,6 +30,12 @@ app.use(bodyParser.urlencoded({
     console.error(err.stack);
     res.status(500).send('Something broke!');
   });
+
+  //Import auth.js file code
+  let auth = require('./auth')(app);
+
+  const passport = require('passport');
+  require('./passport');
   
 // setup the logger
 app.use(morgan('combined', {stream: accessLogStream}));
@@ -40,16 +46,16 @@ app.get('/', (req, res) => {
 });
 
   //READ Function #1 - Return a list of ALL movies to the user
-  app.get('/movies', (req, res) => {
+  app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
-        .then((movies) => {
+      .then((movies) => {
         res.status(201).json(movies);
-    })
-    .catch((err) => {
+      })
+      .catch((error) => {
         console.error(error);
-        res.status(500).send('Error: ' + err);
-    }); 
-  }); 
+        res.status(500).send('Error: ' + error);
+      });
+  });
 
     //READ Function #2 - Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title
     app.get('/movies/:Title', (req, res) => {
