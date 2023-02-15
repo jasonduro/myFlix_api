@@ -65,28 +65,28 @@
             </tr>
             <tr>
               <td>Allow users to update their user info (username, password, email, date of birth)</td>
-              <td>/users/:id</td>
+              <td>/users/:username</td>
               <td>PUT</td>
               <td>None</td>
               <td>A JSON object holding data about the user</td>
             </tr>
             <tr>
               <td>Allow users to add a movie to their list of favorites</td>
-              <td>/users/:id/:movieTitle</td>
+              <td>/users/:username/:movieTitle</td>
               <td>POST</td>
               <td>None</td>
               <td>A text message saying movie title has been added to array</td>
             </tr>
             <tr>
               <td>Allow users to remove a movie from their list of favorites</td>
-              <td>/users/:id/:movieTitle</td>
+              <td>/users/:username/:movieTitle</td>
               <td>DELETE</td>
               <td>None</td>
               <td>A text message saying movie has been removed</td>
             </tr>
             <tr>
               <td>Allow existing users to deregister</td>
-              <td>/users/:id</td>
+              <td>/users/:username</td>
               <td>DELETE</td>
               <td>None</td>
               <td>A text message saying user has been deleted</td>
