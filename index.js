@@ -60,7 +60,8 @@ const { check, validationResult } = require('express-validator');
   
 // setup the logger
 app.use(morgan('combined', {stream: accessLogStream}));
-app.use(express.static('public'));
+//commenting out express.static public so that / can lead to basic message
+//app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.send('Welcome to my super awesome myFlix movie API app-thing-a-bob!');
