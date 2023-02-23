@@ -52,13 +52,15 @@ app.use(cors({
 }));
  */
 
+/* commented out auth and express validator to test
 //Import auth.js file code
 const auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
 //added express validator for server-side input validation
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator'); 
+*/
   
 // setup the logger
 app.use(morgan('combined', {stream: accessLogStream}));
