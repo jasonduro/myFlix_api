@@ -93,8 +93,8 @@ app.get('/', (req, res) => {
       });
   }); 
   
-  //end point that returns only thriller genre movies
-  app.get('/movies/genre', passport.authenticate('jwt', { session: false }), (req, res) => {
+  //end point that returns only thriller genre movies IMPORTANT - passport.authenticate('jwt', REMOVED
+  app.get('/movies/genre', { session: false }), (req, res) => {
     Movies.find({ 'Genre.Name' : 'Thriller' })
     .then((movies) => {
       res.status(201).json(movies);
