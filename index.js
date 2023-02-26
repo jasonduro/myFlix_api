@@ -12,15 +12,12 @@ const Users = Models.User;
 //mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-
 const bodyParser = require('body-parser');
 
 const app = express();
 // create a write stream (in append mode)
 // a ‘log.txt’ file is created in root directory
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
-
-
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -32,7 +29,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
   });
-
 
 //setup Cross-Origin-Resource-Sharing  
 const cors = require('cors');
@@ -93,8 +89,8 @@ app.get('/', (req, res) => {
       });
   }); 
   
-  //end point that returns only thriller genre movies IMPORTANT - passport.authenticate('jwt', REMOVED
-  app.get('/movies/genre', { session: false }), (req, res) => {
+  //end point that returns only thriller genre movies IMPORTANT - passport.authenticate('jwt'{ session: false }), REMOVED
+  app.get('/movies/genre', (req, res) => {
     Movies.find({ 'Genre.Name' : 'Thriller' })
     .then((movies) => {
       res.status(201).json(movies);
