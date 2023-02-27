@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
 });
 
   //READ Function #1 - Return a list of ALL movies to the user
-  app.get('/movies', (req, res) => {
+  app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
       .then((movies) => {
         res.status(201).json(movies);
