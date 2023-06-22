@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express'),
   morgan = require('morgan'),
   fs = require('fs'), // import built in node modules fs and path 
