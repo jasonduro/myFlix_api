@@ -34,7 +34,7 @@ app.use((err, req, res, next) => {
 
 //setup Cross-Origin-Resource-Sharing  
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://myflix-app-reloaded.netlify.app', 'http://localhost:4200' ];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://myflix-app-reloaded.netlify.app', 'http://localhost:4200', 'https://myflix-app-reloaded.netlify.app/', 'https://myflix-app-reloaded.netlify.app/movies', 'https://myflix-app-reloaded.netlify.app/profile', 'https://myflix-app-reloaded.netlify.app/director', 'https://myflix-app-reloaded.netlify.app/genre', 'https://myflix-app-reloaded.netlify.app/login', 'https://myflix-app-reloaded.netlify.app/register', 'https://myflix-app-reloaded.netlify.app/users', 'https://myflix-app-reloaded.netlify.app/users/:username', 'https://myflix-app-reloaded.netlify.app/users/:username/favorites', 'https://myflix-app-reloaded.netlify.app/users/:username/movies/:movieID', 'https://myflix-app-reloaded.netlify.app/users/:username/movies/:movieID/delete', 'https://myflix-app-reloaded.netlify.app/users/:username/update', 'https://myflix-app-reloaded.netlify.app/users/:username/delete' ];
 
 app.use(cors({
   origin: (origin, callback) => {
