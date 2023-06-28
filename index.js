@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ message: 'Something broke!' });
+    res.status(500).send('Something broke!');
   });
 
 //setup Cross-Origin-Resource-Sharing  
@@ -70,11 +70,11 @@ app.get('/', (req, res) => {
       .then((movies) => {
         res.status(201).json(movies);
       })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).json({ message: 'Error: ' + errorjson
-{ message:       });
-  }); }
+      .catch((err) => {
+        console.error(err);
+        res.status(500).json({ message: 'Error: ' + err });
+  }); 
+});
 
     //READ Function #2 - Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title
     app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
