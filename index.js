@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).json({ message: 'Something broke!' });
   });
 
 //setup Cross-Origin-Resource-Sharing  
@@ -61,7 +61,7 @@ app.use(morgan('combined', {stream: accessLogStream}));
 //app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my super awesome myFlix movie API app-thing-a-bob!');
+  res.json({ message: 'Welcome to my super awesome myFlix movie API app-thing-a-bob!'});
 });
 
   //READ Function #1 - Return a list of ALL movies to the user
@@ -72,9 +72,9 @@ app.get('/', (req, res) => {
       })
       .catch((error) => {
         console.error(error);
-        res.status(500).send('Error: ' + error);
-      });
-  });
+        res.status(500).json({ message: 'Error: ' + errorjson
+{ message:       });
+  }); }
 
     //READ Function #2 - Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title
     app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
       })
       .catch((err) => {
           console.error(err);
-          res.status(500).send('Error: ' + err);
+          res.status(500).json({ message: 'Error: ' + err });
       });
   }); 
   
@@ -96,7 +96,7 @@ app.get('/', (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send('Error: ' + err);
+      res.status(500).json({ message: 'Error: ' + err });
     });
   });
 
@@ -108,7 +108,7 @@ app.get('/', (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-        res.status(500).send('Error: ' + err);
+        res.status(500).json({ message: 'Error: ' + err });
       });
   });
   
@@ -120,7 +120,7 @@ app.get('/', (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send('Error: ' + err);
+      res.status(500).json({ message: 'Error: ' + err });
     });
   });
 
@@ -132,7 +132,7 @@ app.get('/', (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-        res.status(500).send('Error: ' + err);
+        res.status(500).json({ message: 'Error: ' + err });
       });
   });
 
@@ -143,8 +143,8 @@ app.get('/', (req, res) => {
           res.status(201).json(users);
       })
       .catch((err) => {
-          console.error(error);
-          res.status(500).send('Error: ' + err);
+          console.error(err);
+          res.status(500).json({ message: 'Error: ' + err });
       });
   });
 
@@ -174,7 +174,7 @@ app.get('/', (req, res) => {
       .then((user) => {
         if (user) {
           //If the user is found, send a response that it already exists
-          return res.status(400).send(req.body.Username + ' already exists');
+          return res.status(400).json({ message: req.body.Username + ' already exists' });
         } else {
           Users
             .create({
@@ -186,13 +186,13 @@ app.get('/', (req, res) => {
             .then((user) => { res.status(201).json(user) })
             .catch((error) => {
               console.error(error);
-              res.status(500).send('Error: ' + error);
+              res.status(500).json({ message: 'Error: ' + error });
             });
         }
       })
       .catch((error) => {
         console.error(error);
-        res.status(500).send('Error: ' + error);
+        res.status(500).json({ message: 'Error: ' + error });
       });
   });
   
@@ -205,7 +205,7 @@ app.get('/', (req, res) => {
       })
       .catch((err) => {
           console.error(err);
-          res.status(500).send('Error: ' + err);
+          res.status(500).json({ message: 'Error: ' + err });
       });
   });
 
@@ -234,7 +234,7 @@ app.get('/', (req, res) => {
         (err, updatedUser) => {
         if(err) {
             console.error(err);
-            res.status(500).send('Error: ' + err);
+            res.status(500).json({ message: 'Error: ' + err });
         } else {
             res.json(updatedUser);
         }
@@ -250,7 +250,7 @@ app.get('/', (req, res) => {
         (err, updatedUser) => {
         if (err) {
             console.error(err);
-            res.status(500).send('Error: ' + err);
+            res.status(500).json({ message: 'Error: ' + err });
         } else {
             res.json(updatedUser);
         }
@@ -266,7 +266,7 @@ app.get('/', (req, res) => {
         (err, updatedUser) => {
         if (err) {
             console.error(err);
-            res.status(500).send('Error: ' + err);
+            res.status(500).json({ message: 'Error: ' + err });
         } else {
             res.json(updatedUser);
         }
