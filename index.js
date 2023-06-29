@@ -243,7 +243,7 @@ app.get('/', (req, res) => {
         });
     });
 
-    app.get('/users/:Username/favoriteMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
+/*     app.get('/users/:Username/favoriteMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
       Users.findOne({ Username: req.params.Username })
       .populate('FavoriteMovies') // This populates the FavoriteMovies field with actual movie documents, instead of just the IDs.
       .exec((err, user) => {
@@ -255,7 +255,7 @@ app.get('/', (req, res) => {
           }
       });
   });
-
+ */
     // UPDATE Function #9 - Allow users to Add a movie to a user's list of favorites
     app.post('/users/:Username/movies/:MovieId', passport.authenticate('jwt', { session: false }), (req, res) => {
         Users.findOneAndUpdate({ Username: req.params.Username }, {
