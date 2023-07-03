@@ -66,7 +66,17 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to my super awesome myFlix movie API app-thing-a-bob!'});
 });
 
-  //READ Function #1 - Return a list of ALL movies to the user
+//READ Function #1 - Return a list of ALL movies to the user
+
+/**
+ * Get a list of all movies.
+ * @route GET /movies
+ * @param {express.Request} req - Express request object.
+ * @param {express.Response} res - Express response object.
+ * @returns {object} Array of all movies.
+ * @throws {500} If there is an error.
+ * @security JWT
+ */
   app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
       .then((movies) => {
@@ -77,6 +87,16 @@ app.get('/', (req, res) => {
         res.status(500).json({ message: 'Error: ' + err });
   }); 
 });
+
+/**
+ * @api {get} /movies/:Title Request specific movie
+ * @apiName GetMovie
+ * @apiGroup Movie
+ * 
+ * @apiParam {String} Title Movie's unique title.
+ * 
+ * @apiSuccess {Object} movie Data about a single movie.
+ */
 
     //READ Function #2 - Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title
     app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -101,6 +121,16 @@ app.get('/', (req, res) => {
       res.status(500).json({ message: 'Error: ' + err });
     });
   });
+
+  /**
+ * @api {get} /movies/genre/:Name Request data about a genre
+ * @apiName GetGenre
+ * @apiGroup Movie
+ * 
+ * @apiParam {String} Name Genre's name.
+ * 
+ * @apiSuccess {Object} genre Data about a genre.
+ */
 
   //READ Function #3 to return data about a genre by name
   app.get('/movies/genre/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -149,6 +179,20 @@ app.get('/', (req, res) => {
           res.status(500).json({ message: 'Error: ' + err });
       });
   });
+
+
+  /**
+ * @api {post} /users Register a new user
+ * @apiName CreateUser
+ * @apiGroup User
+ * 
+ * @apiParam {String} Username New user's unique username.
+ * @apiParam {String} Password New user's password.
+ * @apiParam {String} Email New user's email.
+ * @apiParam {Date} Birthday New user's birth date.
+ * 
+ * @apiSuccess {Object} user Data about a user.
+ */
 
   //CREATE Function #6 - Allow new users to register
   app.post('/users',
