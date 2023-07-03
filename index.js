@@ -66,16 +66,11 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to my super awesome myFlix movie API app-thing-a-bob!'});
 });
 
-//READ Function #1 - Return a list of ALL movies to the user
-
 /**
- * Get a list of all movies.
- * @route GET /movies
- * @param {express.Request} req - Express request object.
- * @param {express.Response} res - Express response object.
- * @returns {object} Array of all movies.
- * @throws {500} If there is an error.
- * @security JWT
+ * Gets a list of all movies.
+ *
+ * @param {express.Request} req - The request object.
+ * @param {express.Response} res - The response object.
  */
   app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
@@ -89,16 +84,11 @@ app.get('/', (req, res) => {
 });
 
 /**
- * @api {get} /movies/:Title Request specific movie
- * @apiName GetMovie
- * @apiGroup Movie
- * 
- * @apiParam {String} Title Movie's unique title.
- * 
- * @apiSuccess {Object} movie Data about a single movie.
+ * Gets a specific movie by title.
+ *
+ * @param {express.Request} req - The request object.
+ * @param {express.Response} res - The response object.
  */
-
-    //READ Function #2 - Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title
     app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
       Movies.findOne({ Title: req.params.Title })
       .then((movie) => {
@@ -110,7 +100,12 @@ app.get('/', (req, res) => {
       });
   }); 
   
-  //end point that returns only thriller genre movies IMPORTANT - passport.authenticate('jwt'{ session: false }), REMOVED
+/**
+ * Gets all movies in the Thriller genre.
+ *
+ * @param {express.Request} req - The request object.
+ * @param {express.Response} res - The response object.
+ */
   app.get('/movies/genre', (req, res) => {
     Movies.find({ 'Genre.Name' : 'Thriller' })
     .then((movies) => {
@@ -122,17 +117,12 @@ app.get('/', (req, res) => {
     });
   });
 
-  /**
- * @api {get} /movies/genre/:Name Request data about a genre
- * @apiName GetGenre
- * @apiGroup Movie
- * 
- * @apiParam {String} Name Genre's name.
- * 
- * @apiSuccess {Object} genre Data about a genre.
+/**
+ * Gets data about a genre by its name.
+ *
+ * @param {express.Request} req - The request object.
+ * @param {express.Response} res - The response object.
  */
-
-  //READ Function #3 to return data about a genre by name
   app.get('/movies/genre/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({ 'Genre.Name': req.params.Name })
       .then((movies) => {
@@ -144,7 +134,12 @@ app.get('/', (req, res) => {
       });
   });
   
-  //end point that returns only Jonathan Demme as Director movies
+/**
+ * Gets all movies by director Jonathan Demme.
+ *
+ * @param {express.Request} req - The request object.
+ * @param {express.Response} res - The response object.
+ */
   app.get('/movies/director', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find({ 'Director.Name' : 'Jonathan Demme' })
     .then((movies) => {
@@ -156,7 +151,12 @@ app.get('/', (req, res) => {
     });
   });
 
-  //READ Function #4 to return data about a director by name
+/**
+ * Gets data about a director by their name.
+ *
+ * @param {express.Request} req - The request object.
+ * @param {express.Response} res - The response object.
+ */
   app.get('/movies/director/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({ 'Director.Name': req.params.Name })
       .then((movies) => {
@@ -168,7 +168,12 @@ app.get('/', (req, res) => {
       });
   });
 
-    //READ Function #5 to get all users
+/**
+ * Gets all users.
+ *
+ * @param {express.Request} req - The request object.
+ * @param {express.Response} res - The response object.
+ */
     app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
       Users.find()
           .then((users) => {
@@ -181,20 +186,12 @@ app.get('/', (req, res) => {
   });
 
 
-  /**
- * @api {post} /users Register a new user
- * @apiName CreateUser
- * @apiGroup User
- * 
- * @apiParam {String} Username New user's unique username.
- * @apiParam {String} Password New user's password.
- * @apiParam {String} Email New user's email.
- * @apiParam {Date} Birthday New user's birth date.
- * 
- * @apiSuccess {Object} user Data about a user.
+/**
+ * Registers a new user.
+ *
+ * @param {express.Request} req - The request object containing the user details.
+ * @param {express.Response} res - The response object.
  */
-
-  //CREATE Function #6 - Allow new users to register
   app.post('/users',
   // Validation logic here for request
   //you can either use a chain of methods like .not().isEmpty()
